@@ -1,0 +1,29 @@
+spring:
+  config:
+    import: optional:classpath:.env.properties
+  application:
+    name: crud
+  datasource:
+    url: jdbc:mysql://localhost:3306/crud_db?serverTimezone=UTC&createDatabaseIfNotExist=true
+    username: crud_db_user
+    password: crud_db_pass
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+  threads:
+    virtual:
+      enabled: true
+  data:
+    jdbc:
+      dialect: mysql
+
+server:
+  port: 8090
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
