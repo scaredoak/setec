@@ -43,8 +43,8 @@ public class ClientController {
     @GetMapping("/all")
     public ResponseEntity<List<ClientResponse>> getAll() {
         List<Client> clients = clientService.findAll();
-        var listAllClients = clientMapper.toListClientResponse(clients);
-        return ResponseEntity.ok(listAllClients);
+        var response = clientMapper.toListClientResponse(clients);
+        return ResponseEntity.ok(response);
     }
 
     @Operation(summary = "Cria cliente", description = "Cria um novo cliente")
@@ -110,7 +110,7 @@ public class ClientController {
             ),
     })
     @GetMapping("/{id}")
-    public ResponseEntity<ClientResponse> get(@PathVariable Long id) {
+    public ResponseEntity<ClientResponse> getById(@PathVariable Long id) {
         var client = clientService.findById(id);
         var response = clientMapper.toClientResponse(client);
         return ResponseEntity.ok(response);
