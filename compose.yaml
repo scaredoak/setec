@@ -1,6 +1,6 @@
 services:
   service_mysql:
-    image: mysql:9.6.0
+    image: mysql:9.5.0
     container_name: crud-mysql
     environment:
       MYSQL_ROOT_USER: crud_db_user
