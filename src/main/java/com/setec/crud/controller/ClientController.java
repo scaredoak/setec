@@ -64,13 +64,6 @@ public class ClientController {
                     )
             ),
             @ApiResponse(
-                    responseCode = "403", description = "O usuário autenticado não pode criar clientes",
-                    content = @Content(
-                            mediaType = "application/json",
-                            schema = @Schema(implementation = ErrorResponse.class)
-                    )
-            ),
-            @ApiResponse(
                     responseCode = "409", description = "Cliente já existe",
                     content = @Content(
                             mediaType = "application/json",
