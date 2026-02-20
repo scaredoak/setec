@@ -25,17 +25,10 @@ public class ClientService {
         String name = client.getName();
 
         Optional<Client> existingEmail = clientRepository.findByEmail(email);
-        Optional<Client> existingName = clientRepository.findByName(name);
 
         if (existingEmail.isPresent()) {
             if (!existingEmail.get().getId().equals(client.getId())) {
                 throw new ResponseStatusException(HttpStatus.CONFLICT, "Client already exists with email: " + email);
-            }
-        }
-
-        if (existingName.isPresent()) {
-            if (!existingName.get().getId().equals(client.getId())) {
-                throw new ResponseStatusException(HttpStatus.CONFLICT, "Client already exists with name: " + name);
             }
         }
 

@@ -20,11 +20,11 @@ public class Client {
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
     @NotBlank
     @NotNull
     private String name;
 
+    @Column(unique = true)
     @Email
     @NotBlank
     @NotNull
