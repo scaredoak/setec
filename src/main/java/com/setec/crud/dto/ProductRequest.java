@@ -1,7 +1,10 @@
 package com.setec.crud.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 public record ProductRequest(
-        String description,
+        @NotBlank String description,
         float price,
         int stockAmount
-) {}
+) {
+}

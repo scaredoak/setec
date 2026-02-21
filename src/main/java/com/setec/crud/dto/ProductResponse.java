@@ -8,4 +8,5 @@ public record ProductResponse(
         float price,
         int stockAmount,
         LocalDateTime createdAt
-) {}
+) {
+}

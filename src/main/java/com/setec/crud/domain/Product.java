@@ -27,7 +27,7 @@ public class Product {
     private float price;
 
     @NotNull
-    private int stockAmount;
+    private int stockAmount; // quantidade no estoque
 
     private LocalDateTime createdAt;
 }
