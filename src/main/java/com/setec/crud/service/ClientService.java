@@ -22,7 +22,6 @@ public class ClientService {
 
     public Client save(Client client) {
         String email = client.getEmail();
-        String name = client.getName();
 
         Optional<Client> existingEmail = clientRepository.findByEmail(email);
 
