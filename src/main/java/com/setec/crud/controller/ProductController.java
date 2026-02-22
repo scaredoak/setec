@@ -67,6 +67,23 @@ public class ProductController {
         return ResponseEntity.ok(response);
     }
 
+    @Operation(summary = "Retorna produto", description = "Busca informações de um produto pela descrição")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200", description = "Produto encontrado",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ProductResponse.class)
+                    )
+            ),
+            @ApiResponse(
+                    responseCode = "404", description = "Produto não encontrado",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    )
+            ),
+    })
     @GetMapping("/description/{description}")
     public ResponseEntity<ProductResponse> getByDescription(@PathVariable String description) {
         var product = productService.findByDescription(description);

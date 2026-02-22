@@ -134,6 +134,24 @@ public class ClientController {
         return ResponseEntity.ok(response);
     }
 
+    @Operation(summary = "Deleta produto", description = "Deleta um produto")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Produto deletado com sucesso"),
+            @ApiResponse(
+                    responseCode = "400", description = "Dados de entrada inválidos",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    )
+            ),
+            @ApiResponse(
+                    responseCode = "404", description = "Produto não encontrado",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    )
+            ),
+    })
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         clientService.delete(id);
