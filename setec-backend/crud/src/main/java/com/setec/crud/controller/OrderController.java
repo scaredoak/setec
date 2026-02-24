@@ -67,6 +67,33 @@ public class OrderController {
         return ResponseEntity.ok(response);
     }
 
+    @Operation(
+            summary = "Retorna pedido pelo identificador do cliente",
+            description = "Busca informações de todos os pedidos de um cliente pelo seu identificador"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200", description = "Pedido encontrado",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = OrderResponse.class)
+                    )
+            ),
+            @ApiResponse(
+                    responseCode = "404", description = "Pedido não encontrado",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    )
+            ),
+    })
+    @GetMapping("/by-client/{id}")
+    public ResponseEntity<List<OrderResponse>> getByClientId(@PathVariable Long id) {
+        var orders = orderService.findByClientId(id);
+        var response = orderMapper.toListOrderResponse(orders);
+        return ResponseEntity.ok(response);
+    }
+
     @Operation(summary = "Cria pedido", description = "Cria um novo pedido")
     @ApiResponses(value = {
             @ApiResponse(

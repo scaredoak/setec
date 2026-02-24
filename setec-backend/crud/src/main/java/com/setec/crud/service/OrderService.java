@@ -13,6 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderService {
     private final OrderRepository orderRepository;
+    private final ClientService clientService;
 
     public List<Order> findAll() {
         return orderRepository.findAll();
@@ -25,6 +26,11 @@ public class OrderService {
     public Order findById(Long id) {
         return orderRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found with id: " + id));
+    }
+
+    public List<Order> findByClientId(Long id) {
+        clientService.findById(id); // checa se cliente existe
+        return orderRepository.findByClientId(id);
     }
 
     public void delete(Long id) {
