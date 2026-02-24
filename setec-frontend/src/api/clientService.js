@@ -1,7 +1,7 @@
-import api from "./base"
+import api from './base'
 
 async function getAll() {
-  const response = await api.get("/client/all")
+  const response = await api.get('/client/all')
   return response
 }
 
@@ -16,7 +16,7 @@ async function getByName(name) {
 }
 
 async function create(data) {
-  const response = await api.post("/client", data)
+  const response = await api.post('/client', data)
   return response
 }
 
