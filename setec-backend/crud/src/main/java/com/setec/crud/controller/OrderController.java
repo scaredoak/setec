@@ -94,6 +94,31 @@ public class OrderController {
         return ResponseEntity.ok(response);
     }
 
+    @Operation(
+            summary = "Retorna o total de pedidos do cliente",
+            description = "Busca o valor total de pedidos de um cliente pelo seu identificador"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200", description = "Total de pedidos do cliente encontrado",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = Integer.class)
+                    )
+            ),
+            @ApiResponse(
+                    responseCode = "404", description = "Cliente não encontrado",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)
+                    )
+            )
+    })
+    @GetMapping("/total/{id}")
+    public ResponseEntity<Integer> getTotalByClientId(@PathVariable Long id) {
+        return ResponseEntity.ok(orderService.findTotalByClientId(id));
+    }
+
     @Operation(summary = "Cria pedido", description = "Cria um novo pedido")
     @ApiResponses(value = {
             @ApiResponse(

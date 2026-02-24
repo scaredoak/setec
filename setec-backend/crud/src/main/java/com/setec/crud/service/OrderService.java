@@ -33,6 +33,11 @@ public class OrderService {
         return orderRepository.findByClientId(id);
     }
 
+    public Integer findTotalByClientId(Long id) {
+        clientService.findById(id); // checa se cliente existe
+        return findByClientId(id).size();
+    }
+
     public void delete(Long id) {
         findById(id);
         orderRepository.deleteById(id);
