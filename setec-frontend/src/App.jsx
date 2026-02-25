@@ -1,33 +1,78 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react"
+import clientService from "./api/clientService"
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [costumers, setCostumers] = useState([])
+  const [costumerForm, setCostumerForm] = useState({
+    name: "",
+    email: ""
+  })
+
+  useEffect(() => {
+    clientService.getAll()
+      .then(res => {
+        setCostumers(res.data)
+      })
+      .catch(e => {
+        console.error("Erro: ", e)
+      })
+  }, [])
+
+  function handleChange(e) {
+    const { name, value } = e.target
+
+    setCostumerForm(previous => ({ ...previous, [name]: value }))
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+
+    try {
+      await clientService.create(costumerForm)
+      const newCostumers = await clientService.getAll()
+      setCostumers(newCostumers.data)
+    } catch (e) {
+      console.error(e)
+    }
+  }
 
   return (
     <>
+      <h1>Clientes</h1>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <form onSubmit={handleSubmit}>
+          <label>Nome: </label><input name="name" type="text" onChange={handleChange} required /><br />
+
+          <label>Email: </label><input name="email" type="email" onChange={handleChange} required />
+          <br />
+
+          <button type="submit">Cadastrar cliente</button>
+        </form>
+
+        <br />
+
+        <table id="costumers">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>NOME</th>
+              <th>EMAIL</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {costumers.map(client => {
+              return (
+                <tr key={crypto.randomUUID()}>
+                  <td>{client.id}</td>
+                  <td>{client.name}</td>
+                  <td>{client.email}</td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
