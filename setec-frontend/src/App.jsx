@@ -1,6 +1,7 @@
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom"
 import Clients from "./pages/Clients"
 import Home from "./pages/Home"
+import Products from "./pages/Products"
 
 function About() {
   return <h1>About page!</h1>
@@ -21,7 +22,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}/>
           <Route path="/clientes" element={<Clients />} />
-          <Route path="/produtos" element={<Clients />} />
+          <Route path="/produtos" element={<Products />} />
           <Route path="/pedidos" element={<Clients />} />
           <Route path="/about" element={<About />} />
         </Routes>
