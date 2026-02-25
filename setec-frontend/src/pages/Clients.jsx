@@ -20,7 +20,6 @@ export default function Clients() {
 
   function handleChange(e) {
     const { name, value } = e.target
-
     setCostumerForm(previous => ({...previous, [name]: value}))
   }
 
@@ -31,6 +30,7 @@ export default function Clients() {
       await clientService.create(costumerForm)
       const newCostumers = await clientService.getAll()
       setCostumers(newCostumers.data)
+      document.getElementById("client-submit-form").reset()
     } catch (e) {
       console.error(e)
     }
@@ -40,7 +40,7 @@ export default function Clients() {
     <>
       <h1>Clientes</h1>
       <div>
-        <form onSubmit={handleSubmit}>
+        <form id="client-submit-form" onSubmit={handleSubmit}>
           <label>Nome: </label><input name="name" type="text" onChange={handleChange} required/><br/>
 
           <label>Email: </label><input name="email" type="email" onChange={handleChange} required/>
