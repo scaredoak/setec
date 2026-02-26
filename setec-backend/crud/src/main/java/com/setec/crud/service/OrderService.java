@@ -8,12 +8,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class OrderService {
     private final OrderRepository orderRepository;
     private final CostumerService costumerService;
+    private final ProductService productService;
 
     public List<Order> findAll() {
         return orderRepository.findAll();
@@ -40,6 +44,32 @@ public class OrderService {
     }
 
     public Order save(Order order) {
+        // <ProductId, ProductQuantity>
+        Map<Long, Long> productCounts = order
+                .getProducts()
+                .stream()
+                .map((p) -> p.getId())
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+        productCounts.forEach((productId, productQuantity) -> {
+            var product = productService.findById(productId);
+            Long stockAmount = product.getStockAmount();
+
+            if (productQuantity > stockAmount) {
+                String message = "Product doesn't have enough stock: %s (ID %d)";
+                String description = product.getDescription();
+                Long id = product.getId();
+
+                throw new ResponseStatusException(
+                        HttpStatus.CONFLICT,
+                        String.format(message, description, id)
+                );
+            } else {
+                product.setStockAmount(stockAmount - productQuantity);
+                productService.update(product);
+            }
+        });
+
         var savedOrder = orderRepository.save(order);
         return findById(savedOrder.getId());
     }

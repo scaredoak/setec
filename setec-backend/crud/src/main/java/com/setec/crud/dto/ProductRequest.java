@@ -5,6 +5,6 @@ import jakarta.validation.constraints.NotBlank;
 public record ProductRequest(
         @NotBlank String description,
         float price,
-        int stockAmount
+        Long stockAmount
 ) {
 }

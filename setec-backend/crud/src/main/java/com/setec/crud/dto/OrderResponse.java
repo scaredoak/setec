@@ -4,7 +4,7 @@ import java.util.List;
 
 public class OrderResponse {
     public record Costumer(Long id, String name, String email) {}
-    public record Product(Long id, String description, float price, int stackAmount) {}
+    public record Product(Long id, String description, float price, Long stockAmount) {}
 
     public Long id;
     public Costumer costumer;

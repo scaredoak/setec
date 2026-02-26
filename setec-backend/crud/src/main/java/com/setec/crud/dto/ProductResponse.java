@@ -6,7 +6,7 @@ public record ProductResponse(
         Long id,
         String description,
         float price,
-        int stockAmount,
+        Long stockAmount,
         LocalDateTime createdAt
 ) {
 }
