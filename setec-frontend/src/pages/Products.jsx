@@ -59,7 +59,7 @@ export default function Products() {
           <thead>
             <tr>
               <th>ID</th>
-              <th>DESCRIÇão</th>
+              <th>DESCRIÇÃO</th>
               <th>PREÇO</th>
               <th>QUANTIDADE EM ESTOQUE</th>
             </tr>
