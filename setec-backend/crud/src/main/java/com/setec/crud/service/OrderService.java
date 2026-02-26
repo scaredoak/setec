@@ -19,10 +19,6 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
-    public Order save(Order order) {
-        return orderRepository.save(order);
-    }
-
     public Order findById(Long id) {
         return orderRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found with id: " + id));
@@ -41,5 +37,10 @@ public class OrderService {
     public void delete(Long id) {
         findById(id);
         orderRepository.deleteById(id);
+    }
+
+    public Order save(Order order) {
+        var savedOrder = orderRepository.save(order);
+        return findById(savedOrder.getId());
     }
 }
