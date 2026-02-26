@@ -1,27 +1,27 @@
 import api from './base'
 
 async function getAll() {
-  const response = await api.get('/client/all')
+  const response = await api.get('/costumer/all')
   return response
 }
 
 async function getById(id) {
-  const response = await api.get(`/client/{id}`)
+  const response = await api.get(`/costumer/{id}`)
   return response
 }
 
 async function getByName(name) {
-  const response = await api.get(`/client/name/{name}`)
+  const response = await api.get(`/costumer/name/{name}`)
   return response
 }
 
 async function create(data) {
-  const response = await api.post('/client', data)
+  const response = await api.post('/costumer', data)
   return response
 }
 
 async function remove() {
-  const response = await api.get(`/client/{id}`)
+  const response = await api.get(`/costumer/{id}`)
   return response
 }
 

@@ -3,9 +3,9 @@ package com.setec.crud.dto;
 import java.util.List;
 
 public class OrderRequest {
-    public record Client(Long id) {}
+    public record Costumer(Long id) {}
     public record Product(Long id) {}
 
-    public Client client;
+    public Costumer costumer;
     public List<Product> products;
 }

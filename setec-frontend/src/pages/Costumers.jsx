@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-import clientService from "../api/clientService"
+import costumerService from "../api/costumerService"
 
-export default function Clients() {
+export default function Costumers() {
   const [costumers, setCostumers] = useState([])
   const [costumerForm, setCostumerForm] = useState({
     name: "",
@@ -9,7 +9,7 @@ export default function Clients() {
   })
 
   useEffect(() => {
-    clientService.getAll()
+    costumerService.getAll()
       .then(res => {
         setCostumers(res.data)
       })
@@ -27,10 +27,10 @@ export default function Clients() {
     e.preventDefault()
 
     try {
-      await clientService.create(costumerForm)
-      const newCostumers = await clientService.getAll()
+      await costumerService.create(costumerForm)
+      const newCostumers = await costumerService.getAll()
       setCostumers(newCostumers.data)
-      document.getElementById("client-submit-form").reset()
+      document.getElementById("costumer-submit-form").reset()
     } catch (e) {
       console.error(e)
     }
@@ -40,7 +40,7 @@ export default function Clients() {
     <>
       <h1>Clientes</h1>
       <div>
-        <form id="client-submit-form" onSubmit={handleSubmit}>
+        <form id="costumer-submit-form" onSubmit={handleSubmit}>
           <label>Nome: </label><input name="name" type="text" onChange={handleChange} required/><br/>
 
           <label>Email: </label><input name="email" type="email" onChange={handleChange} required/>
@@ -61,12 +61,12 @@ export default function Clients() {
           </thead>
 
           <tbody>
-            {costumers.map(client => {
+            {costumers.map(costumer => {
               return (
                 <tr key={crypto.randomUUID()}>
-                  <td>{client.id}</td>
-                  <td>{client.name}</td>
-                  <td>{client.email}</td>
+                  <td>{costumer.id}</td>
+                  <td>{costumer.name}</td>
+                  <td>{costumer.email}</td>
                 </tr>
               )
             })}

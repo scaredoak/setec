@@ -14,6 +14,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     @Query(value = "SELECT * FROM tb_order WHERE id = :id", nativeQuery = true)
     Optional<Order> findById(Long id);
 
-    @Query(value = "SELECT * FROM tb_order WHERE client_id = :id", nativeQuery = true)
-    List<Order> findByClientId(Long id);
+    @Query(value = "SELECT * FROM tb_order WHERE costumer_id = :id", nativeQuery = true)
+    List<Order> findByCostumerId(Long id);
 }

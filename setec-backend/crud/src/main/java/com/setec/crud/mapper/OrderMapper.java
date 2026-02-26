@@ -1,7 +1,6 @@
 package com.setec.crud.mapper;
 
 import com.setec.crud.domain.Order;
-import com.setec.crud.domain.Product;
 import com.setec.crud.dto.OrderRequest;
 import com.setec.crud.dto.OrderResponse;
 import org.mapstruct.Mapper;
@@ -14,16 +13,16 @@ import java.util.List;
 public interface OrderMapper {
     @Mapping(target = "createdAt", expression = "java(java.time.LocalDateTime.now())")
 
-    @Mapping(source = "client", target = "client")
+    @Mapping(source = "costumer", target = "costumer")
     @Mapping(source = "products", target = "products")
     Order toOrder(OrderRequest orderRequest);
 
-    @Mapping(target = "client", expression = "java(mapClient(order))")
+    @Mapping(target = "costumer", expression = "java(mapCostumer(order))")
     OrderResponse toOrderResponse(Order order);
     List<OrderResponse> toListOrderResponse(List<Order> orders);
 
-    default OrderResponse.Client mapClient(Order order) {
-        var orderClient = order.getClient();
-        return new OrderResponse.Client(orderClient.getId(), orderClient.getName(), orderClient.getEmail());
+    default OrderResponse.Costumer mapCostumer(Order order) {
+        var orderCostumer = order.getCostumer();
+        return new OrderResponse.Costumer(orderCostumer.getId(), orderCostumer.getName(), orderCostumer.getEmail());
     }
 }

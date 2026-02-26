@@ -20,8 +20,8 @@ public class Order {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "client_id", nullable = false)
-    private Client client;
+    @JoinColumn(name = "costumer_id", nullable = false)
+    private Costumer costumer;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

@@ -87,9 +87,9 @@ public class OrderController {
                     )
             ),
     })
-    @GetMapping("/by-client/{id}")
-    public ResponseEntity<List<OrderResponse>> getByClientId(@PathVariable Long id) {
-        var orders = orderService.findByClientId(id);
+    @GetMapping("/by-costumer/{id}")
+    public ResponseEntity<List<OrderResponse>> getByCostumerId(@PathVariable Long id) {
+        var orders = orderService.findByCostumerId(id);
         var response = orderMapper.toListOrderResponse(orders);
         return ResponseEntity.ok(response);
     }
@@ -115,8 +115,8 @@ public class OrderController {
             )
     })
     @GetMapping("/total/{id}")
-    public ResponseEntity<Integer> getTotalByClientId(@PathVariable Long id) {
-        return ResponseEntity.ok(orderService.findTotalByClientId(id));
+    public ResponseEntity<Integer> getTotalByCostumerId(@PathVariable Long id) {
+        return ResponseEntity.ok(orderService.findTotalByCostumerId(id));
     }
 
     @Operation(summary = "Cria pedido", description = "Cria um novo pedido")

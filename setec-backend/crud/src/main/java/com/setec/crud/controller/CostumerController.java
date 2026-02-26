@@ -1,11 +1,11 @@
 package com.setec.crud.controller;
 
-import com.setec.crud.domain.Client;
-import com.setec.crud.dto.ClientRequest;
-import com.setec.crud.dto.ClientResponse;
+import com.setec.crud.domain.Costumer;
+import com.setec.crud.dto.CostumerRequest;
+import com.setec.crud.dto.CostumerResponse;
 import com.setec.crud.exceptions.ErrorResponse;
-import com.setec.crud.mapper.ClientMapper;
-import com.setec.crud.service.ClientService;
+import com.setec.crud.mapper.CostumerMapper;
+import com.setec.crud.service.CostumerService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -24,11 +24,11 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/client")
-public class ClientController {
+@RequestMapping("/api/v1/costumer")
+public class CostumerController {
 
-    private final ClientService clientService;
-    private final ClientMapper clientMapper;
+    private final CostumerService costumerService;
+    private final CostumerMapper costumerMapper;
 
     @Operation(summary = "Retorna clientes", description = "Busca informações de todos os clientes registrados")
     @ApiResponses(value = {
@@ -36,14 +36,14 @@ public class ClientController {
                     responseCode = "200", description = "Clientes encontrados",
                     content = @Content(
                             mediaType = "application/json",
-                            schema = @Schema(implementation = ClientResponse.class)
+                            schema = @Schema(implementation = CostumerResponse.class)
                     )
             ),
     })
     @GetMapping("/all")
-    public ResponseEntity<List<ClientResponse>> getAll() {
-        List<Client> clients = clientService.findAll();
-        var response = clientMapper.toListClientResponse(clients);
+    public ResponseEntity<List<CostumerResponse>> getAll() {
+        List<Costumer> costumers = costumerService.findAll();
+        var response = costumerMapper.toListCostumerResponse(costumers);
         return ResponseEntity.ok(response);
     }
 
@@ -53,7 +53,7 @@ public class ClientController {
                     responseCode = "201", description = "Cliente criado com sucesso",
                     content = @Content(
                             mediaType = "application/json",
-                            schema = @Schema(implementation = ClientResponse.class)
+                            schema = @Schema(implementation = CostumerResponse.class)
                     )
             ),
             @ApiResponse(
@@ -72,14 +72,14 @@ public class ClientController {
             ),
     })
     @PostMapping
-    public ResponseEntity<ClientResponse> save(@RequestBody @Valid ClientRequest request) {
-        var client = clientMapper.toClient(request);
-        var savedClient = clientService.save(client);
-        var response = clientMapper.toClientResponse(savedClient);
+    public ResponseEntity<CostumerResponse> save(@RequestBody @Valid CostumerRequest request) {
+        var costumer = costumerMapper.toCostumer(request);
+        var savedCostumer = costumerService.save(costumer);
+        var response = costumerMapper.toCostumerResponse(savedCostumer);
         var uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(savedClient.getId())
+                .buildAndExpand(savedCostumer.getId())
                 .toUri();
 
         return ResponseEntity.created(uri).body(response);
@@ -91,7 +91,7 @@ public class ClientController {
                     responseCode = "200", description = "Cliente encontrado",
                     content = @Content(
                             mediaType = "application/json",
-                            schema = @Schema(implementation = ClientResponse.class)
+                            schema = @Schema(implementation = CostumerResponse.class)
                     )
             ),
             @ApiResponse(
@@ -103,9 +103,9 @@ public class ClientController {
             ),
     })
     @GetMapping("/{id}")
-    public ResponseEntity<ClientResponse> getById(@PathVariable Long id) {
-        var client = clientService.findById(id);
-        var response = clientMapper.toClientResponse(client);
+    public ResponseEntity<CostumerResponse> getById(@PathVariable Long id) {
+        var costumer = costumerService.findById(id);
+        var response = costumerMapper.toCostumerResponse(costumer);
         return ResponseEntity.ok(response);
     }
 
@@ -116,7 +116,7 @@ public class ClientController {
                     responseCode = "200", description = "Cliente encontrado",
                     content = @Content(
                             mediaType = "application/json",
-                            schema = @Schema(implementation = ClientResponse.class)
+                            schema = @Schema(implementation = CostumerResponse.class)
                     )
             ),
             @ApiResponse(
@@ -128,9 +128,9 @@ public class ClientController {
             ),
     })
     @GetMapping("/name/{name}")
-    public ResponseEntity<ClientResponse> getByName(@PathVariable String name) {
-        var client = clientService.findByName(name);
-        var response = clientMapper.toClientResponse(client);
+    public ResponseEntity<CostumerResponse> getByName(@PathVariable String name) {
+        var costumer = costumerService.findByName(name);
+        var response = costumerMapper.toCostumerResponse(costumer);
         return ResponseEntity.ok(response);
     }
 
@@ -154,7 +154,7 @@ public class ClientController {
     })
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        clientService.delete(id);
+        costumerService.delete(id);
         return ResponseEntity.noContent().build();
     }
 }

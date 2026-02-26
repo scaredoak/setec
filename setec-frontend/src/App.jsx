@@ -1,5 +1,5 @@
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom"
-import Clients from "./pages/Clients"
+import Costumers from "./pages/Costumers"
 import Home from "./pages/Home"
 import Products from "./pages/Products"
 
@@ -21,9 +21,9 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home />}/>
-          <Route path="/clientes" element={<Clients />} />
+          <Route path="/clientes" element={<Costumers />} />
           <Route path="/produtos" element={<Products />} />
-          <Route path="/pedidos" element={<Clients />} />
+          <Route path="/pedidos" element={<Costumers />} />
           <Route path="/about" element={<About />} />
         </Routes>
       </BrowserRouter>
