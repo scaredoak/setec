@@ -41,9 +41,12 @@ export default function Costumers() {
       <h1>Clientes</h1>
       <div>
         <form id="costumer-submit-form" onSubmit={handleSubmit}>
-          <label>Nome: </label><input name="name" type="text" onChange={handleChange} required/><br/>
+          <label>Nome: </label><input name="name" type="text" onChange={handleChange} required/>
+          <br/>
+          <br/>
 
           <label>Email: </label><input name="email" type="email" onChange={handleChange} required/>
+          <br/>
           <br/>
 
           <button type="submit">Cadastrar cliente</button>

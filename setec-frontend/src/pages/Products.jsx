@@ -42,14 +42,17 @@ export default function Products() {
       <h1>Produtos</h1>
       <div>
         <form id="product-submit-form" onSubmit={handleSubmit}>
-          <label>Descrição: </label><input name="description" type="text" onChange={handleChange} required/><br/>
-
+          <label>Descrição: </label><input name="description" type="text" onChange={handleChange} required/>
+          <br/>
+          <br/>
           <label>Preço: </label><input name="price" type="number" min="0" step="0.01" onChange={handleChange} required/>
           <br/>
 
+          <br/>
           <label>Quantidade no estoque: </label><input name="stockAmount" type="number" onChange={handleChange} required/>
           <br/>
 
+          <br/>
           <button type="submit">Registrar produto</button>
         </form>
 
