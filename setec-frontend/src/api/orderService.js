@@ -6,7 +6,7 @@ async function getAll() {
 }
 
 async function getById(id) {
-  const response = await api.get(`/order/{id}`)
+  const response = await api.get(`/order/${id}`)
   return response
 }
 

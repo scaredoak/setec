@@ -6,7 +6,7 @@ async function getAll() {
 }
 
 async function getById(id) {
-  const response = await api.get(`/costumer/{id}`)
+  const response = await api.get(`/costumer/${id}`)
   return response
 }
 
@@ -21,7 +21,7 @@ async function create(data) {
 }
 
 async function remove() {
-  const response = await api.get(`/costumer/{id}`)
+  const response = await api.get(`/costumer/${id}`)
   return response
 }
 

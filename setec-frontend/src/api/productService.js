@@ -6,7 +6,7 @@ async function getAll() {
 }
 
 async function getById(id) {
-  const response = await api.get(`/product/{id}`)
+  const response = await api.get(`/product/${id}`)
   return response
 }
 
@@ -16,7 +16,7 @@ async function create(data) {
 }
 
 async function remove() {
-  const response = await api.get(`/product/{id}`)
+  const response = await api.get(`/product/${id}`)
   return response
 }
 
