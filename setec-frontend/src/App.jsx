@@ -5,11 +5,6 @@ import Products from "./pages/Products"
 import Orders from "./pages/Orders"
 import OrderDetails from "./pages/OrderDetails"
 
-
-function About() {
-  return <h1>About page!</h1>
-}
-
 function App() {
   return (
     <>
@@ -18,8 +13,7 @@ function App() {
           <Link to="/">Início</Link> |{" "}
           <Link to="/clientes">Clientes</Link> |{" "}
           <Link to="/produtos">Produtos</Link> |{" "}
-          <Link to="/pedidos">Pedidos</Link> |{" "}
-          <Link to="/about">About</Link>
+          <Link to="/pedidos">Pedidos</Link>
         </nav>
 
         <Routes>
@@ -28,7 +22,6 @@ function App() {
           <Route path="/produtos" element={<Products />} />
           <Route path="/pedidos" element={<Orders />} />
           <Route path="/pedidos/:orderId" element={<OrderDetails />} />
-          <Route path="/about" element={<About />} />
         </Routes>
       </BrowserRouter>
     </>
