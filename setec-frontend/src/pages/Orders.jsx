@@ -56,9 +56,10 @@ export default function Orders() {
     <>
       <h1>Pedidos</h1>
       <div>
-        <label>ID do cliente: </label><input name="costumerId" type="number" onChange={handleChangeCostumerId} size="10" required />
-
         <form id="order-submit-form" onSubmit={handleSubmit}>
+          <label>ID do cliente: </label><input name="costumerId" type="number" onChange={handleChangeCostumerId} size="10" required />
+          <br/>
+
           {inputArray.map((item, i) => {
             return (
               <>
