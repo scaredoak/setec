@@ -2,8 +2,9 @@ import { BrowserRouter, Link, Route, Routes } from "react-router-dom"
 import Costumers from "./pages/Costumers"
 import Home from "./pages/Home"
 import Products from "./pages/Products"
-import Orders from "./pages/Orders"
-import OrderDetails from "./pages/OrderDetails"
+import Orders from "./pages/orders/Orders"
+import OrderDetails from "./pages/orders/OrderDetails"
+import OrdersByCostumer from "./pages/orders/OrdersByCostumer"
 import "./App.css"
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/produtos" element={<Products />} />
           <Route path="/pedidos" element={<Orders />} />
           <Route path="/pedidos/:orderId" element={<OrderDetails />} />
+          <Route path="/pedidos/cliente/:costumerId" element={<OrdersByCostumer />} />
         </Routes>
       </BrowserRouter>
     </>

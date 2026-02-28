@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import costumerService from "../api/costumerService"
 
 export default function Costumers() {
@@ -14,8 +15,8 @@ export default function Costumers() {
       .then(res => {
         setCostumers(res.data)
       })
-      .catch(e => {
-        console.error("Erro: ", e)
+      .catch(err => {
+        console.error(err)
       })
   }, [])
 
@@ -32,8 +33,8 @@ export default function Costumers() {
       const newCostumers = await costumerService.getAll()
       setCostumers(newCostumers.data)
       document.getElementById("costumer-submit-form").reset()
-    } catch (e) {
-      console.error(e)
+    } catch (err) {
+      console.error(err)
     }
   }
 
@@ -66,6 +67,7 @@ export default function Costumers() {
               <th>ID</th>
               <th>NOME</th>
               <th>EMAIL</th>
+              <th>PEDIDOS</th>
             </tr>
           </thead>
 
@@ -86,6 +88,7 @@ export default function Costumers() {
                     <td>{costumer.id}</td>
                     <td>{costumer.name}</td>
                     <td>{costumer.email}</td>
+                    <td><Link to={`/pedidos/cliente/${costumer.id}`}>pedidos</Link></td>
                   </tr>
                 )
               })}

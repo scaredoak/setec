@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import orderService from "../api/orderService"
+import orderService from "../../api/orderService"
 
 export default function Orders() {
   const [searchText, setSearchText] = useState("")
@@ -58,8 +58,8 @@ export default function Orders() {
       const newOrders = await orderService.getAll()
       setOrders(newOrders.data)
       document.getElementById("order-submit-form").reset()
-    } catch (e) {
-      console.error(e)
+    } catch (err) {
+      console.error(err)
       if (e.status == 409) {
         const productInfo = e.response.data.message.split(": ")[1]
         alert(`Item fora de estoque: ${productInfo}`)

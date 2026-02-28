@@ -33,8 +33,8 @@ export default function Products() {
       const newProducts = await productService.getAll()
       setProducts(newProducts.data)
       document.getElementById("product-submit-form").reset()
-    } catch (e) {
-      console.error(e)
+    } catch (err) {
+      console.error(err)
     }
   }
 
