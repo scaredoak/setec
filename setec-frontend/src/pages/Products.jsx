@@ -90,7 +90,7 @@ export default function Products() {
                   <tr key={crypto.randomUUID()}>
                     <td>{product.id}</td>
                     <td>{product.description}</td>
-                    <td>{product.price}</td>
+                    <td>R$ {product.price}</td>
                     <td>{product.stockAmount}</td>
                   </tr>
                 )
