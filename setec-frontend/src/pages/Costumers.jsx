@@ -21,7 +21,7 @@ export default function Costumers() {
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    setCostumerForm(previous => ({...previous, [name]: value}))
+    setCostumerForm(previous => ({ ...previous, [name]: value }))
   }
 
   const handleSubmit = async (e) => {
@@ -46,19 +46,19 @@ export default function Costumers() {
       <h1>Clientes</h1>
       <div>
         <form id="costumer-submit-form" onSubmit={handleSubmit}>
-          <label>Nome: </label><input name="name" type="text" onChange={handleChange} required/>
-          <br/>
-          <br/>
+          <label>Nome: </label><input name="name" type="text" onChange={handleChange} required />
+          <br />
+          <br />
 
-          <label>Email: </label><input name="email" type="email" onChange={handleChange} required/>
-          <br/>
-          <br/>
+          <label>Email: </label><input name="email" type="email" onChange={handleChange} required />
+          <br />
+          <br />
 
           <button type="submit">Cadastrar cliente</button>
         </form>
 
-        <br/>
-        <input type="text" placeholder="Pesquisar (ID ou nome)" onChange={handleSearch}/>
+        <br />
+        <input type="text" placeholder="Pesquisar (ID ou nome)" onChange={handleSearch} />
 
         <table id="costumers">
           <thead>
@@ -81,14 +81,14 @@ export default function Costumers() {
                 }
               })
               .map(costumer => {
-              return (
-                <tr key={crypto.randomUUID()}>
-                  <td>{costumer.id}</td>
-                  <td>{costumer.name}</td>
-                  <td>{costumer.email}</td>
-                </tr>
-              )
-            })}
+                return (
+                  <tr key={crypto.randomUUID()}>
+                    <td>{costumer.id}</td>
+                    <td>{costumer.name}</td>
+                    <td>{costumer.email}</td>
+                  </tr>
+                )
+              })}
           </tbody>
         </table>
       </div>

@@ -43,7 +43,7 @@ export default function Orders() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const productsArray = Object.values(ordersForm.products).map(prodId => {
-      return {id: prodId}
+      return { id: prodId }
     })
 
     const payload = {
@@ -81,7 +81,7 @@ export default function Orders() {
       <div>
         <form id="order-submit-form" onSubmit={handleSubmit}>
           <label>ID do cliente: </label><input name="costumerId" type="number" onChange={handleChangeCostumerId} size="10" required />
-          <br/>
+          <br />
 
           {inputArray.map((item, i) => {
             return (
@@ -100,21 +100,21 @@ export default function Orders() {
               </>
             )
           })}
-          <br/>
+          <br />
           <button type="button" onClick={addInput}>Novo produto +</button>
-          <br/>
+          <br />
 
-          <br/>
+          <br />
           <button type="submit">Registrar pedido</button>
         </form>
 
-        <br/>
-        <input type="text" placeholder="Pesquisar (ID)" onChange={handleSearch} />
+        <br />
+        <input type="text" placeholder="Pesquisar (ID do pedido)" onChange={handleSearch} />
 
         <table id="orders">
           <thead>
             <tr>
-              <th>ID DO PEDIDO</th>
+              <th>ID</th>
               <th>NOME DO CLIENTE</th>
               <th>VALOR</th>
               <th>DETALHES</th>
@@ -130,16 +130,16 @@ export default function Orders() {
                   return true
               })
               .map(order => {
-              const priceTotal = order.products.reduce((acc, prod) => acc + prod.price, 0)
-              return (
-                <tr key={crypto.randomUUID()}>
-                  <td>{order.id}</td>
-                  <td>{order.costumer.name}</td>
-                  <td>R$ {priceTotal}</td>
-                  <td><Link to={`/pedidos/${order.id}`}>produtos</Link></td>
-                </tr>
-              )
-            })}
+                const priceTotal = order.products.reduce((acc, prod) => acc + prod.price, 0)
+                return (
+                  <tr key={crypto.randomUUID()}>
+                    <td>{order.id}</td>
+                    <td>{order.costumer.name}</td>
+                    <td>R$ {priceTotal}</td>
+                    <td><Link to={`/pedidos/${order.id}`}>produtos</Link></td>
+                  </tr>
+                )
+              })}
           </tbody>
         </table>
       </div>

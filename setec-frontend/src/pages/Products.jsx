@@ -70,7 +70,7 @@ export default function Products() {
               <th>ID</th>
               <th>DESCRIÇÃO</th>
               <th>PREÇO</th>
-              <th>QUANTIDADE EM ESTOQUE</th>
+              <th>ESTOQUE</th>
             </tr>
           </thead>
 
