@@ -2,11 +2,13 @@ import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import orderService from "../../api/orderService"
 import costumerService from "../../api/costumerService"
+import utils from "../../utils"
 
 export default function OrdersByCostumer() {
   const { costumerId } = useParams()
   const [searchText, setSearchText] = useState("")
   const [orders, setOrders] = useState([])
+  const [allOrdersTotal, setAllOrdersTotal] = useState(0)
 
   const [costumerName, setCostumerName] = useState(null)
 
@@ -21,6 +23,16 @@ export default function OrdersByCostumer() {
 
     orderService.getByCostumerId(costumerId)
       .then(res => {
+        const data = res.data
+
+        setAllOrdersTotal(
+          utils.truncate(
+            data.map(order =>
+              order.products
+                .reduce((acc, product) => acc + product.price, 0)
+            ).reduce((acc, orderTotal) => acc + orderTotal, 0)
+          )
+        )
         setOrders(res.data)
       })
       .catch(err => {
@@ -34,7 +46,10 @@ export default function OrdersByCostumer() {
 
   return (
     <>
-      <h1>Pedidos do cliente {costumerName} (ID {costumerId})</h1>
+      <h1>Pedidos do cliente {costumerId} ({costumerName})</h1>
+
+      <p><b>Valor total de pedidos: </b>R${allOrdersTotal}</p>
+
       <div>
         <br />
         <input type="text" placeholder="Pesquisar (ID do pedido)" onChange={handleSearch} />

@@ -1,17 +1,18 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import orderService from "../../api/orderService";
+import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
+import orderService from "../../api/orderService"
+import utils from "../../utils"
 
 export default function OrderDetails() {
   const { orderId } = useParams()
   const [products, setProducts] = useState([])
-  const [priceTotal, setPriceTotal] = useState(null)
+  const [priceTotal, setPriceTotal] = useState(0)
 
   useEffect(() => {
     orderService.getById(parseInt(orderId))
       .then(res => {
         const data = res.data
-        setPriceTotal(data.products.reduce((acc, p) => acc + p.price, 0))
+        setPriceTotal(utils.truncate(data.products.reduce((acc, p) => acc + p.price, 0)))
 
         // count products
         const count = data.products.reduce((acc, prod) => acc.set(prod.id, (acc.get(prod.id) || 0) + 1), new Map());

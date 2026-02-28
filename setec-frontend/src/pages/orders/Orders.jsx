@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import orderService from "../../api/orderService"
+import utils from "../../utils"
 
 export default function Orders() {
   const [searchText, setSearchText] = useState("")
@@ -130,7 +131,7 @@ export default function Orders() {
                   return true
               })
               .map(order => {
-                const priceTotal = order.products.reduce((acc, prod) => acc + prod.price, 0)
+                const priceTotal = utils.truncate(order.products.reduce((acc, prod) => acc + prod.price, 0))
                 return (
                   <tr key={crypto.randomUUID()}>
                     <td>{order.id}</td>
