@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import orderService from "../api/orderService"
 
 export default function Orders() {
+  const [searchText, setSearchText] = useState("")
   const [orders, setOrders] = useState([])
   const [ordersForm, setOrdersForm] = useState({
     costumer: {
@@ -52,6 +53,10 @@ export default function Orders() {
     setInputArray(arr => ([...arr, { type: "number" }]))
   }
 
+  const handleSearch = (e) => {
+    setSearchText(e.target.value)
+  }
+
   return (
     <>
       <h1>Pedidos</h1>
@@ -85,18 +90,27 @@ export default function Orders() {
         </form>
 
         <br/>
+        <input type="text" placeholder="Pesquisar (ID)" onChange={handleSearch} />
+
         <table id="orders">
           <thead>
             <tr>
               <th>ID DO PEDIDO</th>
               <th>NOME DO CLIENTE</th>
               <th>VALOR</th>
-              <th></th>
+              <th>DETALHES</th>
             </tr>
           </thead>
 
           <tbody>
-            {orders.map(order => {
+            {orders
+              .filter(order => {
+                if (searchText)
+                  return searchText == `${order.id}`
+                else
+                  return true
+              })
+              .map(order => {
               const priceTotal = order.products.reduce((acc, prod) => acc + prod.price, 0)
               return (
                 <tr key={crypto.randomUUID()}>
