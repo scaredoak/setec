@@ -4,6 +4,7 @@ import Home from "./pages/Home"
 import Products from "./pages/Products"
 import Orders from "./pages/Orders"
 import OrderDetails from "./pages/OrderDetails"
+import "./App.css"
 
 function App() {
   return (
