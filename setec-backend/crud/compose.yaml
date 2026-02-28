@@ -10,7 +10,7 @@ services:
       - 3306:3306
     volumes:
       - mysql_data:/var/lib/mysql_data
-    restart: always
+    restart: unless-stopped
 
 volumes:
   mysql_data:
