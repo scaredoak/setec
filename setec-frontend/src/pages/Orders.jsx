@@ -42,7 +42,6 @@ export default function Orders() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log(ordersForm)
     const productsArray = Object.values(ordersForm.products).map(prodId => {
       return {id: prodId}
     })
@@ -61,6 +60,10 @@ export default function Orders() {
       document.getElementById("order-submit-form").reset()
     } catch (e) {
       console.error(e)
+      if (e.status == 409) {
+        const productInfo = e.response.data.message.split(": ")[1]
+        alert(`Item fora de estoque: ${productInfo}`)
+      }
     }
   }
 
