@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import productService from "../api/productService"
 
 export default function Products() {
+  const [searchText, setSearchText] = useState("")
   const [products, setProducts] = useState([])
   const [productsForm, setProductsForm] = useState({
     description: "",
@@ -21,7 +22,7 @@ export default function Products() {
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    setProductsForm(previous => ({...previous, [name]: value}))
+    setProductsForm(previous => ({ ...previous, [name]: value }))
   }
 
   const handleSubmit = async (e) => {
@@ -37,26 +38,31 @@ export default function Products() {
     }
   }
 
+  const handleSearch = (e) => {
+    setSearchText(e.target.value.toLowerCase())
+  }
+
   return (
     <>
       <h1>Produtos</h1>
       <div>
         <form id="product-submit-form" onSubmit={handleSubmit}>
-          <label>Descrição: </label><input name="description" type="text" onChange={handleChange} required/>
-          <br/>
-          <br/>
-          <label>Preço: </label><input name="price" type="number" min="0" step="0.01" onChange={handleChange} required/>
-          <br/>
+          <label>Descrição: </label><input name="description" type="text" onChange={handleChange} required />
+          <br />
+          <br />
+          <label>Preço: </label><input name="price" type="number" min="0" step="0.01" onChange={handleChange} required />
+          <br />
 
-          <br/>
-          <label>Quantidade no estoque: </label><input name="stockAmount" type="number" onChange={handleChange} required/>
-          <br/>
+          <br />
+          <label>Quantidade no estoque: </label><input name="stockAmount" type="number" onChange={handleChange} required />
+          <br />
 
-          <br/>
+          <br />
           <button type="submit">Registrar produto</button>
         </form>
 
-        <br/>
+        <br />
+        <input type="text" placeholder="Pesquisar (ID ou descrição)" onChange={handleSearch} />
 
         <table id="products">
           <thead>
@@ -69,16 +75,26 @@ export default function Products() {
           </thead>
 
           <tbody>
-            {products.map(product => {
-              return (
-                <tr key={crypto.randomUUID()}>
-                  <td>{product.id}</td>
-                  <td>{product.description}</td>
-                  <td>{product.price}</td>
-                  <td>{product.stockAmount}</td>
-                </tr>
-              )
-            })}
+            {products
+              .filter(product => {
+                if (searchText) {
+                  const description = product.description.toLowerCase()
+                  const id = `${product.id}`
+                  return description.includes(searchText) || searchText === id
+                } else {
+                  return true
+                }
+              })
+              .map(product => {
+                return (
+                  <tr key={crypto.randomUUID()}>
+                    <td>{product.id}</td>
+                    <td>{product.description}</td>
+                    <td>{product.price}</td>
+                    <td>{product.stockAmount}</td>
+                  </tr>
+                )
+              })}
           </tbody>
         </table>
       </div>
