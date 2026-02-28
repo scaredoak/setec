@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import costumerService from "../api/costumerService"
 
 export default function Costumers() {
+  const [searchText, setSearchText] = useState("")
   const [costumers, setCostumers] = useState([])
   const [costumerForm, setCostumerForm] = useState({
     name: "",
@@ -36,7 +37,9 @@ export default function Costumers() {
     }
   }
 
-  const handleSearch = (e) => {}
+  const handleSearch = (e) => {
+    setSearchText(e.target.value.toLowerCase())
+  }
 
   return (
     <>
@@ -55,6 +58,7 @@ export default function Costumers() {
         </form>
 
         <br/>
+        <input type="text" placeholder="Pesquisar (ID ou nome)" onChange={handleSearch}/>
 
         <table id="costumers">
           <thead>
@@ -66,7 +70,17 @@ export default function Costumers() {
           </thead>
 
           <tbody>
-            {costumers.map(costumer => {
+            {costumers
+              .filter(costumer => {
+                if (searchText) {
+                  const name = costumer.name.toLowerCase()
+                  const id = `${costumer.id}`
+                  return name.includes(searchText) || searchText === id
+                } else {
+                  return true
+                }
+              })
+              .map(costumer => {
               return (
                 <tr key={crypto.randomUUID()}>
                   <td>{costumer.id}</td>
