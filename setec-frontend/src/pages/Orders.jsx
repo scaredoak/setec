@@ -9,13 +9,13 @@ export default function Orders() {
     costumer: {
       id: null
     },
-    products: []
+    products: {
+      // tagId: productId
+      // each tag is a product unit
+    }
   })
 
-  const initial = [
-    { id: 1, type: "number" }
-  ]
-  const [inputArray, setInputArray] = useState(initial)
+  const [inputArray, setInputArray] = useState([])
 
   useEffect(() => {
     orderService.getAll()
@@ -31,16 +31,31 @@ export default function Orders() {
     setOrdersForm(prev => ({ ...prev, costumer: { id: e.target.value } }))
   }
 
-  const handleChangeProduct = async (e) => {
-    setOrdersForm(prev => ({ ...prev, products: [...prev.products, {id: e.target.value}] }))
+  const handleChangeProduct = (e) => {
+    setOrdersForm(prev => {
+      const tagId = e.target.id.split("-")[1]
+      const obj = prev.products
+      obj[tagId] = e.target.value
+      return ({ ...prev, products: obj })
+    })
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     console.log(ordersForm)
+    const productsArray = Object.values(ordersForm.products).map(prodId => {
+      return {id: prodId}
+    })
+
+    const payload = {
+      costumer: {
+        id: ordersForm.costumer.id
+      },
+      products: productsArray
+    }
 
     try {
-      await orderService.create(ordersForm)
+      await orderService.create(payload)
       const newOrders = await orderService.getAll()
       setOrders(newOrders.data)
       document.getElementById("order-submit-form").reset()
@@ -82,7 +97,8 @@ export default function Orders() {
               </>
             )
           })}
-          <button type="button" onClick={addInput}>+</button>
+          <br/>
+          <button type="button" onClick={addInput}>Novo produto +</button>
           <br/>
 
           <br/>
