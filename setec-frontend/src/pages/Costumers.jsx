@@ -18,12 +18,12 @@ export default function Costumers() {
       })
   }, [])
 
-  function handleChange(e) {
+  const handleChange = (e) => {
     const { name, value } = e.target
     setCostumerForm(previous => ({...previous, [name]: value}))
   }
 
-  async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     try {
@@ -35,6 +35,8 @@ export default function Costumers() {
       console.error(e)
     }
   }
+
+  const handleSearch = (e) => {}
 
   return (
     <>

@@ -26,15 +26,15 @@ export default function Orders() {
       })
   }, [])
 
-  function handleChangeCostumerId(e) {
+  const handleChangeCostumerId = (e) => {
     setOrdersForm(prev => ({ ...prev, costumer: { id: e.target.value } }))
   }
 
-  function handleChangeProduct(e) {
+  const handleChangeProduct = async (e) => {
     setOrdersForm(prev => ({ ...prev, products: [...prev.products, {id: e.target.value}] }))
   }
 
-  async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     console.log(ordersForm)
 
@@ -48,7 +48,7 @@ export default function Orders() {
     }
   }
 
-  function addInput(e) {
+  const addInput = (e) => {
     setInputArray(arr => ([...arr, { type: "number" }]))
   }
 

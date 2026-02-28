@@ -19,12 +19,12 @@ export default function Products() {
       })
   }, [])
 
-  function handleChange(e) {
+  const handleChange = (e) => {
     const { name, value } = e.target
     setProductsForm(previous => ({...previous, [name]: value}))
   }
 
-  async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     try {
