@@ -11,7 +11,7 @@ async function getById(id) {
 }
 
 async function getByName(name) {
-  const response = await api.get(`/costumer/name/{name}`)
+  const response = await api.get(`/costumer/name/${name}`)
   return response
 }
 
