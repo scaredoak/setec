@@ -1,5 +1,6 @@
 package com.setec.crud.dto;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class OrderResponse {
@@ -9,4 +10,5 @@ public class OrderResponse {
     public Long id;
     public Costumer costumer;
     public List<Product> products;
+    public LocalDateTime createdAt;
 }

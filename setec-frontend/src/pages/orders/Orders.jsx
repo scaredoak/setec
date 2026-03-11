@@ -118,6 +118,7 @@ export default function Orders() {
               <th>ID</th>
               <th>NOME DO CLIENTE</th>
               <th>VALOR</th>
+              <th>DATA</th>
               <th>DETALHES</th>
             </tr>
           </thead>
@@ -132,11 +133,15 @@ export default function Orders() {
               })
               .map(order => {
                 const priceTotal = utils.truncate(order.products.reduce((acc, prod) => acc + prod.price, 0))
+
+                const date = new Date(order.createdAt)
+
                 return (
                   <tr key={crypto.randomUUID()}>
                     <td>{order.id}</td>
                     <td>{order.costumer.name}</td>
                     <td>R$ {priceTotal}</td>
+                    <td>{date.toLocaleString("pt-BR")}</td>
                     <td><Link to={`/pedidos/${order.id}`}>produtos</Link></td>
                   </tr>
                 )

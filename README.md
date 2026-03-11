@@ -22,7 +22,7 @@ mvn clean install
 mvn spring-boot:run
 ```
 
-## Frontend:
+## Frontend
 Dependências:
 - Docker
 <br/>**OU**
